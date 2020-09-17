@@ -3,7 +3,7 @@
 class View {
 
     function __construct() {
-        // echo "<p>Esta es una vista</p>";
+        //Llma a la vista que el controlador solicite
     }
 
     function render($nombre) {

@@ -86,9 +86,9 @@
         </div>
         <?php
             //TEST | Ver el objeto de cada archivo
-        //     echo '<pre>';
-        //     print_r($this->files);
-        //     echo '</pre>';
+            // echo '<pre>';
+            // print_r($this->files);
+            // echo '</pre>';
         ?>
         
     </div>

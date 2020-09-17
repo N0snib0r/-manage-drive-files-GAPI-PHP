@@ -22,7 +22,7 @@
 
             <div class="text-left pl-2">Nombre</div>
             <form class="input-group" action="<?php echo constant('URL')."drive/renameFile/".$this->file->id; ?>" method="post">
-                <input type="text" class="form-control" name="name" placeholder="Nombre del archivo" value="<?php echo $this->file->name; ?>">
+                <input type="text" class="form-control" name="inpName" placeholder="Nombre del archivo" value="<?php echo $this->file->name; ?>">
                 <div class="input-group-append">
                     <input class="btn btn-outline-light" type="submit" value="Renombrar">
                 </div>

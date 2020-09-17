@@ -3,7 +3,6 @@ require_once "controllers/errorController.php";
 
 class App {
     function __construct() {
-        // echo "<p>Nueva App</p>";
         $url = isset($_GET['url']) ? $_GET['url']:null;
         $url = rtrim($url, '/');
         $url = explode('/', $url);
@@ -14,8 +13,8 @@ class App {
             //Inicializar la clase Main | Crea el objeto view
             $controller = new Main();
 
-            //Crear un modelo
-            $controller->loadModel('main'); //Si es que necesita un modelo
+            //Crear el modelo respectivo del controlador
+            $controller->loadModel('main');
             $controller->render(); //Cargar la vista principal
             return false;
         }
@@ -26,11 +25,12 @@ class App {
         if(file_exists($fileController)) {
             require_once $fileController;
             //Inicializa el Controlador
-            $controller = new $url[0]; //Inicializa el la clase del controlador
-            $controller->loadModel($url[0]);
+            $controller = new $url[0]; //Inicializa la clase del controlador
+            $controller->loadModel($url[0]); //Intenta llamar a su modelo si es que existe
 
             $nParam = sizeof($url);
 
+            //Captura los paramtros
             if($nParam > 1) {
                 if($nParam > 2) {
                     $param = [];
@@ -45,15 +45,7 @@ class App {
                 $controller->render();
             }
         } else {
-            // echo "PASO REQUIRE";
             $controller = new Errores();
         }
     }
-
-    function include() {
-        require 'google-api-php-client-2.2.4/vendor/autoload.php';
-        include "connection.php";
-        $this->conn = new Connection(); //Por si es necesario
-    }
 }
-?>

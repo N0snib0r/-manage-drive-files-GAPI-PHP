@@ -3,17 +3,16 @@
 class Drive extends Controller { 
     function __construct() {
         parent::__construct();
-        $this->view->mensaje = ""; //Mensaje para para mostrar an Views
-
+        $this->view->mensaje = ""; // Mensaje auxiliar para para mostrar an Views
     }
 
-    function render() {
-        if($this->model->isRegister()) {
-            if(!$this->model->getIdFolder()) {
-                $this->model->createFolder();
+    function render() { // Funcion principal
+        if($this->model->isRegister()) { // Verifica si el usuario esta registrado
+            if(!$this->model->getIdFolder()) { // Verifica si la carpeta de la app existe
+                $this->model->createFolder(); // En caso que no existeriera manda a crear la carpeta
             }
 
-            $files = $this->model->getFolderFiles();
+            $files = $this->model->getFolderFiles(); // Obtiene un listado de las carpetas alojadas en la carpeta de la App
             if(empty($files)) {
                 $this->view->mensaje = "Ningun archivo encontrado";
             }
@@ -22,34 +21,15 @@ class Drive extends Controller {
 
         } else {
             $this->view->authUrl = $this->model->getAuthData();
-            // echo "NO REGISTRADO"; //TEST
             $this->view->render('drive/authentication');
         }
-        
     }
 
-    function download($param=null) { //Download no funciona no necesario
-        $idFile = $param[0];
-        if($this->model->downloadFile($idFile)) {
-            $this->view->mensaje = "Archivo descargado correctamente";
-        } else {
-            $this->view->mensaje = "OCURRIO UN ERRORe";
-        }
+    function createFolder() { // Crea una nueva carpeta en la carpeta de de la App
+        isset($_POST['descFold']) ? $descFold = $_POST['inpSearch'] : $descFold = "";
+        isset($_POST['nameFold']) ? $nameFold = $_POST['nameFold'] : $nameFold = "Nueva carpeta";
 
-        $this->render();
-    }
-
-    function newFolder() {
-        $this->view->render('drive/create');
-    }
-
-    function createFolder() {
-        $descFold = $_POST['descFold'];
-        $nameFold = $_POST['nameFold'];
-        // echo $descFold;
-        // echo $nameFold;
-
-        if($this->model->create($nameFold,$descFold)) {
+        if($this->model->create($nameFold,$descFold)) { // Manda a crear la carpeta
             $this->view->mensaje = "Carpeta creada correctamente";
         } else {
             $this->view->mensaje = "OCURRIO UN ERROR";
@@ -57,7 +37,7 @@ class Drive extends Controller {
         $this->render();
     }
 
-    function deleteFile($param = null) { //Elimina el archivo/carpeta permanentemente
+    function deleteFile($param = null) { // Elimina el archivo/carpeta permanentemente | no pide confirmacion
         $idFile = $param[0];
         if($this->model->delete($idFile)) {
             $this->view->mensaje = "Archivo eliminado correctamente";
@@ -67,21 +47,23 @@ class Drive extends Controller {
         $this->render();
     }
 
-    function seeFile($param = null) {
+    function seeFile($param = null) { // Muestra detalles del archivo para renombrar
         $idFile = $param[0];
-        $file = $this->model->getById($idFile);
+        if($file = $this->model->getById($idFile)) {
+            $this->view->mensaje = "Archivo eliminado correctamente";
+        } else {
+            $this->view->mensaje = "OCURRIO UN ERROR";
+        }
 
-        $this->view->file = $file;
-
-        // $this->view->mensaje = "OCURRIO UN ERROR";
+        $this->view->file = $file; // Envia los datos del correo a la vista
         $this->view->render('drive/detalle');
     }
 
-    function renameFile($param = null) { //No funciona
+    function renameFile($param = null) { // Renombrar un archivo/carpeta sin alterar su ID
         $idFile = $param[0];
-        $newName = $_POST['name'];
-        if($this->model->rename($idFile,$newName)) {
+        isset($_POST['inpName']) ? $newName = $_POST['inpName'] : $newName = "";
 
+        if($this->model->rename($idFile,$newName)) {
             $this->view->mensaje = "Archivo renombrado correctamente";
         } else {
             $this->view->mensaje = "OCURRIO UN ERROR";
