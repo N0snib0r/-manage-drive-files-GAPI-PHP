@@ -14,7 +14,7 @@
 - Descargar el [SDK de Google API para PHP](https://github.com/googleapis/google-api-php-client/releases) y desconprimirlo en raiz.
 - Funcionamiento comprobado con las versiones **2.2.4** y **2.7.0 para PHP7.4**
 ### Pasos
-1. Registrarse con una cuenta de google en [Google developers](https://console.developers.google.com/).
+1. Registrarse con una cuenta de google en [Consola Google developers](https://console.developers.google.com/).
 2. Crear un proyecto.
 3. Buscar la API de Google que necesitas en el buscador **Google Drive API**, y activarla.
 4. Crear la pantalla de consentimiento (Solo es necesario el nombre)
@@ -33,6 +33,9 @@
 - Modificar *linea 9* con el nombre del SDK que se descargo y se encuentra en raiz.
 ### libs/connection.php
 - *Line 9*: Colocar el nombre de las nuevas credenciales de la App (El nombre puede variar).
+### Carpeta de Drive
+- Para cambiar el nombre, color y descripcion predeterminada de la carpeta ir a **models/driveModel.php** *line 13*
+- Si se realiza algun cambio en el nomnbre de la carpeta principal tambien hacerlo en *models/uploadModel.php* *line 7*
 
 ## Funcionamiento
-- Para cargar la pantalla principal coloqeue la ruta: http://{SERVER}/{RAIZ}/main | *ej: http://example/gg-drive/drive*
+- Para cargar la pantalla principal coloque la ruta: http://{SERVER}/{RAIZ}/main | *ej: http://example/gg-drive/drive*

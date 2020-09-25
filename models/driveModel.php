@@ -10,7 +10,11 @@ class DriveModel extends Model {
 
     function __construct() {
         parent::__construct();
-        $this->folderName = "Folder APP";         // Nombre de la carpeta que se creara el la raiz del Usuario
+        //Caracteristicas de la Carpeta de Drive
+        $this->folderName = "Carpeta API";         // Nombre de la carpeta que se creara el la raiz del Usuario
+        $this->folderColor = 'rgb(251, 233, 131)'; // Color de la carpeta que se creara el la raiz del Usuario | Solo RGB
+        $this->folderDesc = "Descripcion APP";     // Descripcion de la carpeta que se creara el la raiz del Usuario
+
         $this->client = $this->conn->getClient(); // Cliente autentificado
         $this->service = $this->createService();  // Servicio principal de Google Drive
         $this->idFolder = $this->searchFolder();  // Verifica si la carpeta de la App ya ah sido creada
@@ -112,8 +116,8 @@ class DriveModel extends Model {
             $file = new \Google_Service_Drive_DriveFile(); // Segundo servicio de Google Drive API | Manipula archivos
             $file->setName($this->folderName);
             $file->setMimeType('application/vnd.google-apps.folder');
-            $file->setFolderColorRgb('rgb(22, 167, 101)'); // En base a los colores RGB predeterminados de las carpetas de Drive
-            $file->setDescription('Carpeta principal Grapes'); // Descripcion de la carpeta
+            $file->setFolderColorRgb($this->folderColor); // En base a los colores RGB predeterminados de las carpetas de Drive
+            $file->setDescription($this->folderDesc); // Descripcion de la carpeta
             
             $folder = $this->service->files->create($file); // Lanzamiento a Drive
 

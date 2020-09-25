@@ -25,8 +25,12 @@ class Drive extends Controller {
         }
     }
 
+    function newFolder() {
+        $this->view->render('drive/create');
+    }
+
     function createFolder() { // Crea una nueva carpeta en la carpeta de de la App
-        isset($_POST['descFold']) ? $descFold = $_POST['inpSearch'] : $descFold = "";
+        isset($_POST['descFold']) ? $descFold = $_POST['descFold'] : $descFold = "";
         isset($_POST['nameFold']) ? $nameFold = $_POST['nameFold'] : $nameFold = "Nueva carpeta";
 
         if($this->model->create($nameFold,$descFold)) { // Manda a crear la carpeta

@@ -4,7 +4,8 @@ class uploadModel extends Model{
 
     function __construct() {
         parent::__construct();
-        $this->folderName = "Folder APP";         // Nombre de la carpeta que se creara el la raiz del Usuario
+        $this->folderName = "Carpeta API";         // Nombre de la carpeta que se creara el la raiz del Usuario
+
         $this->client = $this->conn->getClient(); // Cliente autentificado
         $this->service = $this->createService();  // Servicio principal de Google Drive
         $this->idFolder = $this->searchFolder();  // Verifica si la carpeta de la App ya ah sido creada
