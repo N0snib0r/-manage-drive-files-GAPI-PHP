@@ -34,8 +34,8 @@
 ### libs/connection.php
 - *Line 9*: Colocar el nombre de las nuevas credenciales de la App (El nombre puede variar).
 ### Carpeta de Drive
-- Para cambiar el nombre, color y descripcion predeterminada de la carpeta ir a **models/driveModel.php** *line 13*
-- Si se realiza algun cambio en el nomnbre de la carpeta principal tambien hacerlo en *models/uploadModel.php* *line 7*
+- Para cambiar el nombre, color y descripcion predeterminada de la carpeta ir a **models/driveModel.php** - *line 13*
+- Si se realiza algun cambio en el nomnbre de la carpeta principal tambien hacerlo en **models/uploadModel.php** - *line 7*
 
 ## Funcionamiento
 - Para cargar la pantalla principal coloque la ruta: http://{SERVER}/{RAIZ}/main | *ej: http://example/gg-drive/drive*
